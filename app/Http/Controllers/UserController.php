@@ -47,7 +47,12 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        @dd($user);
+        $posts = $user->posts;
+
+        foreach ($posts as $item) {
+          @dd($item);
+        }
+
     }
 
     /**
