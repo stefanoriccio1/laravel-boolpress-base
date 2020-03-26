@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\User;
 
 class UserTableSeeder extends Seeder
 {
@@ -11,6 +12,13 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+      for ($i=0; $i < 4; $i++) {
+
+        $newUser = new User;
+        $newUser->name = $faker->name();
+        $newUser->email = $faker->email;
+        $newUser->password = $faker->email;
+
+      }
     }
 }
