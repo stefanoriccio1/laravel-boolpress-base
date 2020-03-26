@@ -16,14 +16,12 @@ class PostTableSeeder extends Seeder
     {
         for ($i=0; $i < 10 ; $i++) {
           $post = new Post;
-
+          $post->user_id = rand(1, 4);
           $post->title = $faker->text($manNbChars= 100);
           $post->content = $faker->text($manNbChars= 200);
           $post->slug = Str::slug($post->title);
           $post->author = $faker->name();
           $post->save();
-
-
         }
     }
 }
