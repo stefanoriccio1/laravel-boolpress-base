@@ -13,4 +13,9 @@ class Post extends Model
     'slug',
     'author'
   ];
+  
+  public function user()
+  {
+    return $this->hasOne('App\User');
+  }
 }
