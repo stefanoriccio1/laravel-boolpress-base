@@ -11,13 +11,14 @@
 
 @section('main')
   @foreach ($posts as $post)
-    @dd($post->user);
     <div class="room">
       <ul>
         <li>id: {{$post->id}}</li>
         <li>Title: {{$post->title}}</li>
         <li>Text: {{$post->content}}</li>
         <li>Author: {{$post->author}}</li>
+        <li>User's Name: {{$post->user->name}}</li>
+        <li>User's email: {{$post->user->email}}</li>
         <li>
           <form action="{{route('posts.destroy', $post->id)}}" method="POST">
             @csrf
