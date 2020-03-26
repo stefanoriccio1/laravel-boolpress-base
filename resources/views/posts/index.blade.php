@@ -11,6 +11,7 @@
 
 @section('main')
   @foreach ($posts as $post)
+    @dd($post->user);
     <div class="room">
       <ul>
         <li>id: {{$post->id}}</li>
