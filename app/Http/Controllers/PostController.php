@@ -36,7 +36,24 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $data = $request->all();
+
+      $request->validate([
+        'title' => 'required|max:100',
+        'content' => 'required|max:200',
+        'slug' => 'required',
+        'author' => 'required',
+
+      ]);
+
+      $post = new Post;
+      $post->fill($data);
+      $save = $post->save();
+
+      if($save == true){
+        $post = Post::orderBy('id','desc')->first();
+        return redirect()->route('posts.show', compact('post'));
+      }
     }
 
     /**
