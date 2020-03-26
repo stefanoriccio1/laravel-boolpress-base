@@ -17,13 +17,13 @@
         <li>Title: {{$post->title}}</li>
         <li>Text: {{$post->content}}</li>
         <li>Author: {{$post->author}}</li>
-        {{-- <li>
-          <form action="{{route('rooms.destroy', $room->id)}}" method="POST">
+        <li>
+          <form action="{{route('posts.destroy', $post->id)}}" method="POST">
             @csrf
             @method('DELETE')
             <button type="submit">DELETE</button>
           </form>
-        </li> --}}
+        </li>
       </ul>
     </div>
   @endforeach

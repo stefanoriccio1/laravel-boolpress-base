@@ -62,10 +62,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        //
-    }
+      if(empty($post)){
+        abort('404');
+      }
+      return view('posts.show', compact('post'));
+  }
 
     /**
      * Show the form for editing the specified resource.
@@ -73,9 +76,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+      if(empty($post)){
+        abort('404');
+      }
+
+      return view('posts.edit', compact('post'));
     }
 
     /**
@@ -87,7 +94,25 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $post = Post::find($id);
+      if(empty($post)){
+        abort('404');
+      }
+
+      $data = $request->all();
+      $request->validate([
+
+        'title' => 'required|max:100',
+        'content' => 'required|max:200',
+        'slug' => 'required',
+        'author' => 'required',
+      ]);
+
+      $updated = $post->update($data);
+      if($updated == true){
+        $post = Post::find($id);
+        return redirect()->route('posts.show', compact('post'));
+      }
     }
 
     /**
@@ -96,8 +121,14 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+      $id = $post->id;
+      $deleted = $post->delete();
+      $data = [
+        'id' => $id,
+        'posts' => Post::all()
+      ];
+      return view('posts.index', $data);
     }
 }
