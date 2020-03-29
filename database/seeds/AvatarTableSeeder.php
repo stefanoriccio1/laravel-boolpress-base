@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use app\Avatar;
+use app\User;
 
 class AvatarTableSeeder extends Seeder
 {
